@@ -1,0 +1,222 @@
+export const venuesData = [
+  {
+    id: 1,
+    name: "SCC Republic",
+    address: "Republic Lawn, Main Road, Lane Number 6, Koregaon Park Annexe, Mundhwa",
+    city: "Pune",
+    state: "Maharashtra",
+    pincode: "411036",
+    type: "Lawn",
+    description: "Beautiful outdoor lawn venue perfect for drive-in cinema experiences",
+    image: "https://sunsetcinemaclub.in/img/admin/events/cover/WDNrDvC8eY_republic2.jpg"
+  },
+  {
+    id: 2,
+    name: "DLF Cyberhub",
+    address: "21, DLF Tower 10th Rd, DLF Cyber City, DLF Phase 2, Sector 24",
+    city: "Delhi NCR",
+    state: "Haryana",
+    pincode: "122022",
+    type: "Amphitheatre",
+    description: "Modern amphitheatre in the heart of Cyber City",
+    image: "https://www.cbre.co.in/resources/fileassets/IN-SMPL-16846/837c7372/617b7d10-9e5c-4dfc-a9da-cdeb0585e94f_Photo_3_large.jpg"
+  },
+  {
+    id: 3,
+    name: "Algorythm, Nexus Shantiniketan Mall",
+    address: "Nexus Shantiniketan Mall, Whitefield Main Rd, Thigalarapalya, Krishnarajapura",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560067",
+    type: "Mall",
+    description: "Premium mall venue with state-of-the-art facilities",
+    image: "https://sunsetcinemaclub.in/img/admin/events/cover/ElVyv8QRR9_rsz_a_1440x960.jpg"
+  },
+  {
+    id: 4,
+    name: "SCC Gurgaon - Drive-In Cinema",
+    address: "Urban Akhara, Archview Dr, Sector 58",
+    city: "Delhi NCR",
+    state: "Haryana",
+    pincode: "122102",
+    type: "Drive-In",
+    description: "Dedicated drive-in cinema experience in Gurgaon",
+    image: "https://sunsetcinemaclub.in/img/admin/events/cover/IBOCLptgd5_rsz__mg_6123_1.jpg"
+  },
+  {
+    id: 5,
+    name: "Max House",
+    address: "Opposite NSIC metro station, adj. New Friends Colony",
+    city: "Delhi NCR",
+    state: "Delhi",
+    pincode: "110020",
+    type: "Rooftop",
+    description: "Rooftop venue with stunning city views",
+    image: "https://www.commercialdesignindia.com/cloud/2025/09/22/Images-15-1536x1024-1-800x600.jpg"
+  },
+  {
+    id: 6,
+    name: "Infiniti Mall (Malad)",
+    address: "New Link Rd, Malad, Mindspace, Malad West",
+    city: "Mumbai",
+    state: "Maharashtra",
+    pincode: "400064",
+    type: "Mall",
+    description: "Rooftop venue at popular Malad mall",
+    image: "https://images.jdmagicbox.com/v2/comp/mumbai/80/022p8008380/catalogue/pvr-icon-cinemas-infiniti-mall--andheri-west-mumbai-cinema-halls-1uf0p8y.jpg"
+  },
+  {
+    id: 7,
+    name: "Onegolf Brewery",
+    address: "Survey no. 237, 251, ISB Rd, Financial District, Vattinagulapally",
+    city: "Hyderabad",
+    state: "Telangana",
+    pincode: "500075",
+    type: "Brewery",
+    description: "Unique brewery venue with craft beer and cinema",
+    image: "https://sunsetcinemaclub.in/img/admin/gallery/DcRYxWEsTb__DSC6756.jpg"
+  },
+  {
+    id: 8,
+    name: "Forum South Bengaluru Rooftop",
+    address: "Prestige Srihari Khoday Centre, Konankunte Cross Kanakapura Road",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560062",
+    type: "Mall",
+    description: "Rooftop venue with panoramic city views",
+    image: "https://cdn.shopify.com/s/files/1/0562/4011/1678/files/SB9.jpg?v=1709534788"
+  },
+  {
+    id: 9,
+    name: "Nexus Koramangala",
+    address: "Hosur Rd, Chikku Lakshmaiah Layout, Koramangala",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560095",
+    type: "Mall",
+    description: "Popular mall venue in the heart of Koramangala",
+    image: "https://www.nexusselecttrust.com/resources/assets/images/nexus-koramangala/banner2.jpg"
+  },
+  {
+    id: 10,
+    name: "Abbotsford Heritage Hotel",
+    address: "Prasada Bhawan, Oak Park, above ATI, Mallital",
+    city: "Nainital",
+    state: "Uttarakhand",
+    pincode: "263001",
+    type: "Hotel",
+    description: "Heritage hotel venue with mountain views",
+    image: "https://static.wixstatic.com/media/7dfe0c_f3507ba84ccd42079357732f21535531~mv2.jpg/v1/fill/w_1500,h_624,al_c/7dfe0c_f3507ba84ccd42079357732f21535531~mv2.jpg"
+  },
+  {
+    id: 11,
+    name: "Marriott Executive Apartments, Lakeside Chalet, Powai",
+    address: "near Chinmayanand Ashram, Kailash Nagar, Mayur Nagar, Morarji Nagar",
+    city: "Mumbai",
+    state: "Maharashtra",
+    pincode: "400087",
+    type: "Hotel",
+    description: "Luxury hotel venue with lakeside views",
+    image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/9a/7b/2c/exterior.jpg?w=900&h=500&s=1"
+  },
+  {
+    id: 12,
+    name: "1 MG - Lido Mall",
+    address: "1/2, Old Madras Rd, Halasuru, Someshwarpura, Sivanchetti Gardens",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560008",
+    type: "Mall",
+    description: "Historic mall venue in central Bangalore",
+    image: "https://www.lentlo.com/wp-content/uploads/2024/03/1-MG-Lido-Mall-3.jpg"
+  },
+  {
+    id: 13,
+    name: "NGage Club",
+    address: "10th Floor, RMZ One Paramount, Campus 20",
+    city: "Chennai",
+    state: "Tamil Nadu",
+    pincode: "600116",
+    type: "Club",
+    description: "Premium club venue with exclusive access",
+    image: "https://res.cloudinary.com/jll-global-ods/image/upload/v1687908386/prd/Focus/Property/swpddzmcocw4dd5ftcxy.jpg"
+  },
+  {
+    id: 14,
+    name: "Chapter 6, Koramangala",
+    address: "No. 6, 2nd floor, beside Drunkling Sizzlers & Pub, 1st Cross Rd, 5th Block",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560095",
+    type: "Restaurant",
+    description: "Trendy restaurant venue with great ambiance",
+    image: "https://b.zmtcdn.com/data/pictures/0/18602880/6a3da785be89ba4cda97359daa066b72.jpg?fit=around|750:500&crop=750:500;*,*"
+  },
+  {
+    id: 15,
+    name: "Centrio Mall",
+    address: "108/84, Rabindra Nath Tagore Marg, Vijay Colony, Shakti Colony",
+    city: "Dehradun",
+    state: "Uttarakhand",
+    pincode: "248001",
+    type: "Mall",
+    description: "Sky deck venue with mountain views",
+    image: "https://acpldesign.com/wp-content/uploads/2024/05/4-11.jpg"
+  },
+  {
+    id: 16,
+    name: "Bella Vista Chandigarh",
+    address: "Welcomhotel By ITC Hotels, Bella Vista, S.M. - 8, City Centre, Nada Sahib Rd, Sector 5",
+    city: "Chandigarh",
+    state: "Haryana",
+    pincode: "134109",
+    type: "Hotel",
+    description: "Luxury hotel venue in Chandigarh",
+    image: "https://gos3.ibcdn.com/b13fd4b5-e33b-482d-a0c0-59ec45b5f303.jpg"
+  },
+  {
+    id: 17,
+    name: "SPRUZZO - THE GOURMET CAFE",
+    address: "tirumala corporate, 5/5, above tata croma, New Palasia",
+    city: "Indore",
+    state: "Madhya Pradesh",
+    pincode: "452001",
+    type: "Cafe",
+    description: "Gourmet cafe venue with unique dining experience",
+    image: "https://dineout-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/v1701774396/819b45faee7fd0be0769a26f31bfdbc5.jpg"
+  },
+  {
+    id: 18,
+    name: "Garuda Mall",
+    address: "Magrath Road, Ashok Nagar",
+    city: "Bangalore",
+    state: "Karnataka",
+    pincode: "560025",
+    type: "Mall",
+    description: "Popular mall venue in central Bangalore",
+    image: "https://garudamall.in/wp-content/uploads/2023/05/1-6-optimized.jpg"
+  },
+  {
+    id: 19,
+    name: "Seven Rivers Brewing Co",
+    address: "Sinquerim, Candolim",
+    city: "Goa",
+    state: "Goa",
+    pincode: "403515",
+    type: "Brewery",
+    description: "Beachside brewery venue in Goa",
+    image: "https://b.zmtcdn.com/data/pictures/8/20576908/c58a13fefb775c640635a3f32b8d5917.jpeg?fit=around|960:500&crop=960:500;*,*"
+  },
+  {
+    id: 20,
+    name: "Le Meridien Nagpur",
+    address: "Wardha Road, Flyover, opp. Mihan",
+    city: "Nagpur",
+    state: "Maharashtra",
+    pincode: "441108",
+    type: "Hotel",
+    description: "Luxury hotel venue with drive-in cinema",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/2d/d6/24/c0/exterior.jpg"
+  }
+];
