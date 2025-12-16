@@ -34,7 +34,7 @@ const Hero = () => {
     if (heroSection) {
       const heroBottom = heroSection.getBoundingClientRect().bottom + window.scrollY;
       window.scrollTo({
-        top: heroBottom - 60, // 60px above the bottom of hero
+        top: heroBottom - 120, // 120px above the bottom of hero
         behavior: 'smooth'
       });
     }
@@ -123,7 +123,7 @@ const Hero = () => {
                 <button onClick={openModal} className="w-full sm:w-auto bg-yellow-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 shadow-lg min-h-[44px]">
                   Join The Club
                 </button>
-                <button onClick={() => navigate('/events')} className="w-full sm:w-auto border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300 min-h-[44px]">
+                <button onClick={scrollToContent} className="w-full sm:w-auto border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300 min-h-[44px]" aria-label="Scroll to events">
                   View Events
                 </button>
               </motion.div>

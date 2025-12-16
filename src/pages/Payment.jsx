@@ -466,7 +466,7 @@ const PaymentMethods = ({ finalPrice, onCancel, onPaymentError, onEmailSubmit, o
 
   const generateUpiLink = (amount) => {
     const upiParams = {
-      pa: 'shinescreenings2025@ibl',
+      pa: 'shinescreeningmovies@ybl',
       pn: 'Shine Screenings',
       am: amount,
       cu: 'INR',
