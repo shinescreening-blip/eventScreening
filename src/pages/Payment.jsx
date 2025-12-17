@@ -364,7 +364,7 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
   );
 };
 
-/* ================= ERROR MODAL ================= */
+
 
 const PaymentErrorModal = ({ isOpen, onClose }) => {
   return (
