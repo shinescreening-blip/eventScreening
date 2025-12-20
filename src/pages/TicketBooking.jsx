@@ -377,6 +377,30 @@ const TicketBooking = () => {
       
       // Simulate processing delay
       await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // START: EmailJS Integration (Admin Notification)
+      try {
+        const templateParams = {
+          user_name: bookingState.customerInfo.name,
+          user_email: bookingState.customerInfo.email,
+          action_time: new Date().toLocaleString(),
+          message: "User clicked Proceed to Payment"
+        };
+        
+        // Sending email to admin - awaiting to ensure it tries effectively, but catching errors to not block flow
+        await emailjs.send(
+          'YOUR_SERVICE_ID', // Replace with your Service ID
+          'YOUR_TEMPLATE_ID', // Replace with your Template ID
+          templateParams,
+          'YOUR_PUBLIC_KEY'   // Replace with your Public Key
+        );
+        console.log('Admin notification email sent successfully');
+      } catch (emailError) {
+        // Silently fail as per requirements ("Handle errors silently", "Allow payment flow to continue")
+        console.error('Failed to send admin notification email:', emailError);
+      }
+      // END: EmailJS Integration
+      
       
       const bookingData = {
         eventTitle: event.title,
