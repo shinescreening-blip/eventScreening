@@ -114,7 +114,7 @@ const UniversalEventCard = ({ event, index = 0, variant = 'default' }) => {
             <div className="flex items-center space-x-1 sm:space-x-2">
               <Calendar size={14} className="sm:w-4 sm:h-4" />
               <span className="text-xs sm:text-sm font-medium">
-                {safeFormatDate(event.date)}
+                {safeFormatDate(event.formattedDate || event.date)}
               </span>
             </div>
           </div>
@@ -135,7 +135,7 @@ const UniversalEventCard = ({ event, index = 0, variant = 'default' }) => {
         <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-6">
           <div className="flex items-center text-sm text-gray-400 mb-1">
             <Calendar className="w-4 h-4 mr-2 text-yellow-400" />
-            <span>{safeFormatDate(event.date)}</span>
+            <span>{safeFormatDate(event.formattedDate || event.date)}</span>
           </div>
           <div className="flex items-center text-gray-400 text-xs sm:text-sm">
             <Clock size={14} className="mr-2 text-yellow-400 sm:w-4 sm:h-4" />
@@ -147,7 +147,7 @@ const UniversalEventCard = ({ event, index = 0, variant = 'default' }) => {
           </div>
           <div className="flex items-center text-gray-400 text-xs sm:text-sm">
             <Users size={14} className="mr-2 text-yellow-400 sm:w-4 sm:h-4" />
-            <span className="truncate">{event.capacity} seats available</span>
+            <span className="truncate">{event.displayCapacity || `${event.capacity} seats available`}</span>
           </div>
         </div>
 

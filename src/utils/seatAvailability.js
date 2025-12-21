@@ -63,7 +63,11 @@ export const calculateRemainingSeats = (eventDate, totalSeats) => {
   if (isWithin4Hours) {
     remainingSeats = Math.min(3, Math.max(1, remainingSeats));
   }
-  // For today's events, cap at 10 seats
+  // For today's events and next 7 days, show random 10-20 seats
+  else if (daysUntilEvent >= 0 && daysUntilEvent <= 7) {
+    remainingSeats = Math.floor(Math.random() * 11) + 10; // Random 10-20 tickets
+  }
+  // For other today's events, cap at 10 seats
   else if (isToday) {
     remainingSeats = Math.min(10, remainingSeats);
   }
@@ -125,7 +129,7 @@ export const updateEventsWithSeatAvailability = (events) => {
       seatStatus: status,
       isLowAvailability,
       // Keep the original capacity string for display
-      displayCapacity: `${remainingSeats} of ${totalSeats} seats left`,
+      displayCapacity: `${remainingSeats} seats available`,
       // For display in the UI
       availabilityStatus: isLowAvailability ? 'Hurry! Limited seats' : 'Available',
     };

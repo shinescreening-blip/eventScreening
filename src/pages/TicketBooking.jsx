@@ -365,9 +365,23 @@ const TicketBooking = () => {
     
     // Seat preference validation is no longer needed as we have a default
     // The default preference is set to regular fare (C Row)
+
+    // Validate Name and Email
+    if (!bookingState.customerInfo.name.trim()) {
+      dispatch({ type: 'SET_VALIDATION_ERROR', field: 'name', message: 'Name is required' });
+      return;
+    }
     
-    
-    
+    if (!bookingState.customerInfo.email) {
+      dispatch({ type: 'SET_VALIDATION_ERROR', field: 'email', message: 'Email is required' });
+      return;
+    } else {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(bookingState.customerInfo.email)) {
+        dispatch({ type: 'SET_VALIDATION_ERROR', field: 'email', message: 'Please enter a valid email address' });
+        return;
+      }
+    }
     try {
       dispatch({ type: 'SET_PROCESSING', payload: true });
       
@@ -379,26 +393,29 @@ const TicketBooking = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // START: EmailJS Integration (Admin Notification)
+      // START: EmailJS Integration (Admin Notification)
       try {
-        const templateParams = {
-          user_name: bookingState.customerInfo.name,
-          user_email: bookingState.customerInfo.email,
-          action_time: new Date().toLocaleString(),
-          message: "User clicked Proceed to Payment"
-        };
-        
-        // Sending email to admin - awaiting to ensure it tries effectively, but catching errors to not block flow
-        await emailjs.send(
-          'YOUR_SERVICE_ID', // Replace with your Service ID
-          'YOUR_TEMPLATE_ID', // Replace with your Template ID
-          templateParams,
-          'YOUR_PUBLIC_KEY'   // Replace with your Public Key
-        );
-        console.log('Admin notification email sent successfully');
+        if (bookingState.customerInfo.name && bookingState.customerInfo.email) {
+          const templateParams = {
+            user_name: bookingState.customerInfo.name,
+            user_email: bookingState.customerInfo.email,
+            action_time: new Date().toLocaleString(),
+            message: "User clicked Proceed to Payment"
+          };
+          
+          await emailjs.send(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+            templateParams,
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+          );
+          console.log('Admin notification email sent successfully');
+        }
       } catch (emailError) {
         // Silently fail as per requirements ("Handle errors silently", "Allow payment flow to continue")
         console.error('Failed to send admin notification email:', emailError);
       }
+      // END: EmailJS Integration
       // END: EmailJS Integration
       
       

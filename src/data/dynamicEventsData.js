@@ -9,7 +9,7 @@ export const movieEventMappings = [
     description: "Ana, a college student, interviews an enigmatic billionaire entrepreneur, Christian, for her campus' periodical. A steamy sadomasochistic affair starts between the two, whose roots lie in his past.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
-    capacity: "3",
+    capacity: "13",
     city: "Delhi NCR",
     movieName: "Our Fault"
   },
@@ -100,7 +100,7 @@ export const movieEventMappings = [
     description: "Join us for an epic Marvel marathon featuring the best of MCU. Food and beverages available throughout the event.",
     image: "https://images.thedirect.com/media/article_full/marvel-posters-ranked.jpg",
     price: "899",
-    capacity: "200 people",
+    capacity: "20 people",
     city: "Delhi NCR",
     movieName: "Avengers: Endgame"
   },
@@ -126,7 +126,7 @@ export const movieEventMappings = [
     description: "Welcome to Jurassic Park! Experience the thrill of dinosaurs in our premium drive-in setup with crystal clear sound.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/GBZpBbHppA_IMG20250608123536 (2).jpg",
     price: "899",
-    capacity: "120 cars",
+    capacity: "12 cars",
     city: "Delhi NCR",
     movieName: "Jurassic Park"
   }
@@ -214,7 +214,8 @@ export const generateDynamicEvents = () => {
       // Override with dynamic values
       id: `${baseEvent.id}-${seed}-${i}`, // Make ID unique per day
       title: baseEvent.title,
-      date: formattedDate,
+      date: eventDate, // Store actual Date object for calculations
+      formattedDate: formattedDate, // Store formatted date for display
       movieName: baseEvent.movieName,
       isActive: true,
       dayOffset: i,
