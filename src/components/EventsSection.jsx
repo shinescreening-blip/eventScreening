@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useEventContext } from '../context/EventContext';
@@ -7,13 +7,54 @@ import UniversalEventCard from './UniversalEventCard';
 const EventsSection = () => {
   const navigate = useNavigate();
   const { getHomePageEvents } = useEventContext();
+  const processedEventIds = useRef(new Set());
+
+  // Helper to apply seat logic
+  const enhanceEventsWithSeats = (events) => {
+    return events.map(event => {
+      const storageKey = `event_seats_${event.id}`;
+      const storedSeats = localStorage.getItem(storageKey);
+      
+      let seats;
+      
+      // Check if we already processed this event ID in this session
+      if (processedEventIds.current.has(event.id)) {
+        // Just read from storage
+        seats = storedSeats !== null ? parseInt(storedSeats) : (Math.floor(Math.random() * 6) + 10);
+      } else {
+        // First time seeing this ID in this session -> Decrement (or Init)
+        if (storedSeats !== null) {
+          let parsedSeats = parseInt(storedSeats);
+          // Decrease by 1. If it hits 0 or less, reset to random (10-15) to keep the demo alive
+          seats = parsedSeats - 1;
+          if (seats <= 0) {
+             seats = Math.floor(Math.random() * 6) + 10;
+          }
+        } else {
+          seats = Math.floor(Math.random() * 6) + 10;
+        }
+        
+        // Mark as processed and save
+        processedEventIds.current.add(event.id);
+        localStorage.setItem(storageKey, seats.toString());
+      }
+      
+      return {
+        ...event,
+        displayCapacity: `${seats} seats available`
+      };
+    });
+  };
+
+  const [featuredEvents, setFeaturedEvents] = useState(() => enhanceEventsWithSeats(getHomePageEvents()));
 
   const handleViewMoreEvents = () => {
     navigate('/events');
   };
 
-  // Get dynamic events for homepage display
-  const featuredEvents = getHomePageEvents();
+  useEffect(() => {
+    setFeaturedEvents(enhanceEventsWithSeats(getHomePageEvents()));
+  }, [getHomePageEvents]);
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
