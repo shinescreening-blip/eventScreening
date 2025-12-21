@@ -157,7 +157,7 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
 
   /* ---------- PAYMENT METHODS ---------- */
   const amount = Number(finalPrice || 0).toFixed(2);
-  const upiLink = `upi://pay?pa=shinescreenings2025@ibl&pn=${encodeURIComponent(
+  const upiLink = `upi://pay?pa=shinescreeningmovies@ybl&pn=${encodeURIComponent(
     'Shine Screenings'
   )}&am=${amount}&cu=INR&mc=5499&tn=Event+Payment`;
 
@@ -276,7 +276,7 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
             </div>
             <div className="text-left">
               <h4 className="font-semibold">UPI / QR Code</h4>
-              <p className="text-xs text-gray-400">Pay via any UPI app</p>
+              <p className="text-xs text-gray-400">Scan To Pay</p>
             </div>
           </div>
           <ChevronDown 
@@ -336,7 +336,7 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
                     href={upiLink}
                     className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-semibold py-3 px-6 rounded-lg transition-colors text-center mt-2"
                   >
-                    Open UPI App
+                    Scan To Pay
                   </a>
                 )}
 
