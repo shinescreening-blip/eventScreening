@@ -127,9 +127,14 @@ export const EventProvider = ({ children }) => {
   }, [lastRefresh]);
 
   const getEventById = React.useCallback((id) => {
-    const dynamicEvent = dynamicEvents.find(event => event.id === parseInt(id));
+    // Convert id to string for comparison to handle both string and number IDs
+    const searchId = String(id);
+    
+    // First check dynamic events, then fallback to static events
+    const dynamicEvent = dynamicEvents.find(event => String(event.id) === searchId);
     if (dynamicEvent) return dynamicEvent;
-    return events.find(event => event.id === parseInt(id));
+    
+    return events.find(event => String(event.id) === searchId);
   }, [dynamicEvents, events]);
 
   const selectEvent = React.useCallback((event) => {

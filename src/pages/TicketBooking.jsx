@@ -451,7 +451,6 @@ const TicketBooking = () => {
         subtotal,
         discount: bookingState.coupon.discount,
         finalPrice,
-        finalPrice,
         date: selectedDate, // Use the state which now has the formatted date
         time: selectedTime,
         tickets: bookingState.ticketCount,
