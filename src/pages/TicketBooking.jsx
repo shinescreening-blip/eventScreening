@@ -4,6 +4,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Calendar, Clock, MapPin, Users, Star, ChevronRight, AlertCircle, CheckCircle, Loader2, ChevronDown, Check } from 'lucide-react';
 import { useEventContext } from '../context/EventContext';
 import emailjs from '@emailjs/browser';
+import { formatEventDate } from '../data/dynamicEventsData';
+
+// Helper function to safely format date
+const safeFormatDate = (date) => {
+  try {
+    if (!date) return 'Date not available';
+    // If it's already a string, return as is (unless it looks like an ISO string we want to reformat, but for now trust pre-formatted)
+    // Actually, let's try to parse if it's a string just in case it's ISO
+    if (typeof date === 'string') {
+        const parsed = new Date(date);
+        if (!isNaN(parsed.getTime()) && date.includes('-')) {
+             return formatEventDate(parsed);
+        }
+        return date;
+    }
+    // If it's a Date object, format it
+    if (date instanceof Date) return formatEventDate(date);
+    
+    return 'Invalid date';
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Date not available';
+  }
+};
 
 // Modern state management with useReducer
 const initialBookingState = {
@@ -226,7 +250,9 @@ const TicketBooking = () => {
       }
       
       setEvent(foundEvent);
-      setSelectedDate(foundEvent.date);
+      // Use formatted date if available, otherwise format the raw date
+      const displayDate = safeFormatDate(foundEvent.formattedDate || foundEvent.date);
+      setSelectedDate(displayDate);
       setSelectedTime(foundEvent.time);
       
       
@@ -425,7 +451,8 @@ const TicketBooking = () => {
         subtotal,
         discount: bookingState.coupon.discount,
         finalPrice,
-        date: selectedDate,
+        finalPrice,
+        date: selectedDate, // Use the state which now has the formatted date
         time: selectedTime,
         tickets: bookingState.ticketCount,
         seatPreference: bookingState.seatPreference,
@@ -614,7 +641,7 @@ const TicketBooking = () => {
                 <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
                   <div className="flex items-center text-gray-300 text-sm sm:text-base">
                     <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-yellow-400" />
-                    <span className="truncate">{event.date}</span>
+                    <span className="truncate">{safeFormatDate(event.formattedDate || event.date)}</span>
                   </div>
                   <div className="flex items-center text-gray-300 text-sm sm:text-base">
                     <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-yellow-400" />
@@ -659,7 +686,7 @@ const TicketBooking = () => {
               <div className="mb-4 sm:mb-6">
                 <label className="block text-gray-300 mb-2 sm:mb-3 font-medium text-sm sm:text-base">Select Date</label>
                 <div className="bg-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-700">
-                  <div className="text-white font-semibold text-sm sm:text-base">{event.date}</div>
+                  <div className="text-white font-semibold text-sm sm:text-base">{safeFormatDate(event.formattedDate || event.date)}</div>
                   <div className="text-gray-400 text-xs sm:text-sm">{event.time}</div>
                 </div>
               </div>

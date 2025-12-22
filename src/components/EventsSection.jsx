@@ -10,7 +10,7 @@ const EventsSection = () => {
   const processedEventIds = useRef(new Set());
 
   // Helper to apply seat logic
-  const enhanceEventsWithSeats = (events) => {
+  const enhanceEventsWithSeats = React.useCallback((events) => {
     return events.map(event => {
       const storageKey = `event_seats_${event.id}`;
       const storedSeats = localStorage.getItem(storageKey);
@@ -44,7 +44,7 @@ const EventsSection = () => {
         displayCapacity: `${seats} seats available`
       };
     });
-  };
+  }, []);
 
   const [featuredEvents, setFeaturedEvents] = useState(() => enhanceEventsWithSeats(getHomePageEvents()));
 
@@ -54,7 +54,7 @@ const EventsSection = () => {
 
   useEffect(() => {
     setFeaturedEvents(enhanceEventsWithSeats(getHomePageEvents()));
-  }, [getHomePageEvents]);
+  }, [getHomePageEvents, enhanceEventsWithSeats]);
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">

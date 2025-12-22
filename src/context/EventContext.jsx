@@ -18,109 +18,129 @@ export const EventProvider = ({ children }) => {
   const [lastRefresh, setLastRefresh] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  // Generate dynamic events on mount and when needed
-  useEffect(() => {
-    const refreshEvents = (force = false) => {
-      const now = new Date();
-      const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-      const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + istOffset);
-      const isAfter8PM = istTime.getHours() >= 20;
-      
-      // Always generate new events if forced or if we don't have any yet
-      if (force || !lastRefresh) {
-        console.log('Generating new dynamic events');
-        const newDynamicEvents = generateDynamicEvents();
-        setDynamicEvents(newDynamicEvents);
-        setLastRefresh(now.toISOString());
-        
-        // Store in localStorage
-        localStorage.setItem('lastEventRefresh', now.toISOString());
-        localStorage.setItem('cachedDynamicEvents', JSON.stringify(newDynamicEvents));
-        return;
-      }
-      
-      // Check if we need to refresh based on time
-      const lastRefreshDate = new Date(lastRefresh);
-      const lastRefreshIST = new Date(lastRefreshDate.getTime() + (lastRefreshDate.getTimezoneOffset() * 60 * 1000) + istOffset);
-      
-      // Refresh if:
-      // 1. It's after 8 PM and we haven't refreshed since 8 PM
-      // 2. It's a new day and after 8 PM
-      const shouldRefresh = (
-        (isAfter8PM && lastRefreshIST.getHours() < 20) ||
-        (istTime.getDate() !== lastRefreshIST.getDate() && isAfter8PM)
-      );
-      
-      if (shouldRefresh) {
-        console.log('Refreshing events based on schedule');
-        const newDynamicEvents = generateDynamicEvents();
-        setDynamicEvents(newDynamicEvents);
-        setLastRefresh(now.toISOString());
-        
-        // Store in localStorage
-        localStorage.setItem('lastEventRefresh', now.toISOString());
-        localStorage.setItem('cachedDynamicEvents', JSON.stringify(newDynamicEvents));
-      }
-    };
+  // Helper to generate and save events
+  const generateAndSaveEvents = (now) => {
+    console.log('Generating new dynamic events');
+    const newDynamicEvents = generateDynamicEvents();
+    setDynamicEvents(newDynamicEvents);
+    const timestamp = now.toISOString();
+    setLastRefresh(timestamp);
+    
+    localStorage.setItem('lastEventRefresh', timestamp);
+    localStorage.setItem('cachedDynamicEvents', JSON.stringify(newDynamicEvents));
+  };
 
-    // Initial load - try to load from localStorage first
+  // Initial load effect - runs only once on mount
+  useEffect(() => {
     const loadInitialEvents = () => {
       const storedRefresh = localStorage.getItem('lastEventRefresh');
       const storedEvents = localStorage.getItem('cachedDynamicEvents');
       
       if (storedRefresh && storedEvents) {
-        const lastRefreshDate = new Date(storedRefresh);
-        const now = new Date();
-        const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-        const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + istOffset);
-        const lastRefreshIST = new Date(lastRefreshDate.getTime() + (lastRefreshDate.getTimezoneOffset() * 60 * 1000) + istOffset);
-        
-        // Check if stored events are still valid (same day before 8 PM or next day after 8 PM)
-        const isSameDay = (
-          istTime.getDate() === lastRefreshIST.getDate() &&
-          istTime.getMonth() === lastRefreshIST.getMonth() &&
-          istTime.getFullYear() === lastRefreshIST.getFullYear() &&
-          istTime.getHours() < 20
-        );
-        
-        if (isSameDay) {
-          console.log('Using cached events from localStorage');
-          setDynamicEvents(JSON.parse(storedEvents));
-          setLastRefresh(storedRefresh);
-          return;
+        try {
+          const lastRefreshDate = new Date(storedRefresh);
+          const now = new Date();
+          const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+          
+          const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + istOffset);
+          const lastRefreshIST = new Date(lastRefreshDate.getTime() + (lastRefreshDate.getTimezoneOffset() * 60 * 1000) + istOffset);
+          
+          const isSameDay = (
+            istTime.getDate() === lastRefreshIST.getDate() &&
+            istTime.getMonth() === lastRefreshIST.getMonth() &&
+            istTime.getFullYear() === lastRefreshIST.getFullYear()
+          );
+
+          const isAfter8PM = istTime.getHours() >= 20;
+          const wasAfter8PM = lastRefreshIST.getHours() >= 20;
+
+          // Cache is valid if:
+          // 1. Same day AND (Current is < 8PM OR (Current >= 8PM AND Cache >= 8PM))
+          // 2. Basically, if it's after 8PM, we need a refresh ONLY if cache is from before 8PM today.
+          
+          let isValid = false;
+          if (isSameDay) {
+            if (!isAfter8PM) {
+               // Before 8 PM: Any cache from today is fine (assuming it was generated after 8PM previous day? 
+               // actually logic suggests we rotate at 8PM. So if it's 2PM, cache from 10AM is fine.)
+               isValid = true;
+            } else {
+               // After 8 PM: Cache must be from after 8 PM today
+               if (wasAfter8PM) {
+                 isValid = true;
+               }
+            }
+          }
+
+          if (isValid) {
+            console.log('Using cached events from localStorage');
+            setDynamicEvents(JSON.parse(storedEvents));
+            setLastRefresh(storedRefresh);
+            return;
+          }
+        } catch (e) {
+          console.error("Error parsing cached events:", e);
         }
       }
       
-      // If we get here, we need to generate new events
-      refreshEvents(true);
+      // If no valid cache, generate
+      const now = new Date();
+      generateAndSaveEvents(now);
     };
     
     loadInitialEvents();
-    
-    // Set up interval to check for updates every 5 minutes
-    const interval = setInterval(() => refreshEvents(false), 5 * 60 * 1000);
-    
-    // Cleanup interval on component unmount
+  }, []); // Dependency array empty intentionally for mount only
+
+  // Interval effect for checking updates
+  useEffect(() => {
+    const checkAndRefresh = () => {
+      if (!lastRefresh) return;
+
+      const now = new Date();
+      const istOffset = 5.5 * 60 * 60 * 1000;
+      const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + istOffset);
+      const isAfter8PM = istTime.getHours() >= 20;
+
+      const lastRefreshDate = new Date(lastRefresh);
+      const lastRefreshIST = new Date(lastRefreshDate.getTime() + (lastRefreshDate.getTimezoneOffset() * 60 * 1000) + istOffset);
+
+      // Refresh if:
+      // 1. It's after 8 PM and we haven't refreshed since 8 PM today
+      // 2. It's a new day and after 8 PM (caught by date check usually, but redundant safety)
+      const sameDay = istTime.getDate() === lastRefreshIST.getDate();
+      
+      const needsRefresh = (
+        (isAfter8PM && lastRefreshIST.getHours() < 20 && sameDay) ||
+        (!sameDay && isAfter8PM) // If it's a new day and past 8PM, definitely refresh. 
+        // Note: If new day and < 8PM, we technically keep yesterday's 8PM batch? 
+        // The original logic seemed to imply daily rotation at 8PM.
+      );
+
+      if (needsRefresh) {
+        console.log('Refreshing events based on schedule');
+        generateAndSaveEvents(now);
+      }
+    };
+
+    const interval = setInterval(checkAndRefresh, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, [lastRefresh]);
 
-  const getEventById = (id) => {
-    // First check dynamic events, then fallback to static events
+  const getEventById = React.useCallback((id) => {
     const dynamicEvent = dynamicEvents.find(event => event.id === parseInt(id));
     if (dynamicEvent) return dynamicEvent;
     return events.find(event => event.id === parseInt(id));
-  };
+  }, [dynamicEvents, events]);
 
-  const selectEvent = (event) => {
+  const selectEvent = React.useCallback((event) => {
     setSelectedEvent(event);
-  };
+  }, []);
 
-  // For homepage, use dynamic events; for other pages, use static events
-  const getHomePageEvents = () => {
+  const getHomePageEvents = React.useCallback(() => {
     return dynamicEvents.length > 0 ? dynamicEvents.slice(0, 3) : events.slice(0, 3);
-  };
+  }, [dynamicEvents, events]);
 
-  const value = {
+  const value = React.useMemo(() => ({
     events,
     dynamicEvents,
     selectedEvent,
@@ -128,7 +148,7 @@ export const EventProvider = ({ children }) => {
     selectEvent,
     getHomePageEvents,
     lastRefresh,
-  };
+  }), [events, dynamicEvents, selectedEvent, getEventById, selectEvent, getHomePageEvents, lastRefresh]);
 
   return (
     <EventContext.Provider value={value}>
