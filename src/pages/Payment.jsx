@@ -330,23 +330,10 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
                 {/* UPI ID */}
                 
 
-                {/* UPI Payment Button (Mobile) */}
-                {isMobile && timeLeft > 0 && (
-                  <a
-                    href={upiLink}
-                    className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-semibold py-3 px-6 rounded-lg transition-colors text-center mt-2"
-                  >
-                    Scan To Pay
-                  </a>
-                )}
-
                 {/* Desktop Instructions */}
-                {!isMobile && (
-                  <div className="text-center pt-2">
-                    <p className="text-sm text-gray-400">Scan the QR code with any UPI app</p>
-                    
-                  </div>
-                )}
+                <div className="text-center pt-2">
+                  <p className="text-sm text-gray-400">Scan the QR code with any UPI app</p>
+                </div>
 
                 {/* Cancel Button */}
                 <button
