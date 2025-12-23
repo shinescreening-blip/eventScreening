@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, MapPin, Users, Star, ChevronRight, AlertCir
 import { useEventContext } from '../context/EventContext';
 import emailjs from '@emailjs/browser';
 import { formatEventDate } from '../data/dynamicEventsData';
+import { calculateSeatsBasedOnTime } from '../utils/seatLogic';
 
 // Helper function to safely format date
 const safeFormatDate = (date) => {
@@ -247,6 +248,15 @@ const TicketBooking = () => {
       if (!foundEvent) {
         dispatch({ type: 'SET_VALIDATION_ERROR', payload: { event: 'Event not found' } });
         return;
+      }
+      
+      // If the event doesn't have displayCapacity (e.g. loaded by ID or direct link), add it using current logic
+      if (!foundEvent.displayCapacity) {
+        const seats = calculateSeatsBasedOnTime(foundEvent.id);
+        foundEvent = {
+            ...foundEvent,
+            displayCapacity: `${seats} seats available`
+        };
       }
       
       setEvent(foundEvent);
@@ -652,7 +662,7 @@ const TicketBooking = () => {
                   </div>
                   <div className="flex items-center text-gray-300 text-sm sm:text-base">
                     <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-yellow-400" />
-                    <span className="truncate">{event.capacity}</span>
+                    <span className="truncate">{event.displayCapacity || event.capacity}</span>
                   </div>
                 </div>
 
