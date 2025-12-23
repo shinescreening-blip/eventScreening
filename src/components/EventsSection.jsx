@@ -10,34 +10,33 @@ const EventsSection = () => {
   const processedEventIds = useRef(new Set());
 
   // Helper to apply seat logic
+  // Helper to apply seat logic based on time of day
   const enhanceEventsWithSeats = React.useCallback((events) => {
     return events.map(event => {
-      const storageKey = `event_seats_${event.id}`;
-      const storedSeats = localStorage.getItem(storageKey);
+      const now = new Date();
+      const currentHour = now.getHours(); // 0-23
       
-      let seats;
+      let min, max;
       
-      // Check if we already processed this event ID in this session
-      if (processedEventIds.current.has(event.id)) {
-        // Just read from storage
-        seats = storedSeats !== null ? parseInt(storedSeats) : (Math.floor(Math.random() * 6) + 10);
+      if (currentHour >= 20 || currentHour < 0) { 
+        // 8:00 PM to 12:00 AM (Handling 12 AM as start of next day logic usually, but user said 8PM-12AM)
+        // Adjusting logic: 
+        // 20, 21, 22, 23 -> 15-20
+        min = 15; max = 20;
+      } 
+      
+      if (currentHour >= 20 && currentHour <= 23) {
+         min = 15; max = 20;
+      } else if (currentHour >= 0 && currentHour < 4) {
+         min = 10; max = 15;
+      } else if (currentHour >= 4 && currentHour < 13) {
+         min = 5; max = 10;
       } else {
-        // First time seeing this ID in this session -> Decrement (or Init)
-        if (storedSeats !== null) {
-          let parsedSeats = parseInt(storedSeats);
-          // Decrease by 1. If it hits 0 or less, reset to random (10-15) to keep the demo alive
-          seats = parsedSeats - 1;
-          if (seats <= 0) {
-             seats = Math.floor(Math.random() * 6) + 10;
-          }
-        } else {
-          seats = Math.floor(Math.random() * 6) + 10;
-        }
-        
-        // Mark as processed and save
-        processedEventIds.current.add(event.id);
-        localStorage.setItem(storageKey, seats.toString());
+         // 13 (1 PM) to 20 (8 PM)
+         min = 2; max = 5;
       }
+      
+      const seats = Math.floor(Math.random() * (max - min + 1)) + min;
       
       return {
         ...event,
