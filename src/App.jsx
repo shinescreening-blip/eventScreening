@@ -16,6 +16,7 @@ import TicketBooking from './pages/TicketBooking';
 import Payment from './pages/Payment';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 
 // AppContent component that uses the loading context
 const AppContent = () => {
@@ -23,6 +24,7 @@ const AppContent = () => {
 
   return (
     <>
+      <ScrollToTop />
       <Analytics />
       <LoadingScreen isLoading={isLoading} progress={progress} />
       <div className={isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100 transition-opacity duration-500'}>
