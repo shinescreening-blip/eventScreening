@@ -80,16 +80,16 @@ export const movieEventMappings = [
   },
   {
     id: 7,
-    title: "Drive-in Cinema: Top Gun Maverick",
+    title: "Our Fault",
     type: "Drive-in",
-    time: "2:30 PM",
-    location: "Chittaranjan Park",
+    time: "8:30 PM",
+    location: "JLN gate 14, Delhi",
     description: "Feel the need for speed with Top Gun: Maverick. Experience high-octane action in our premium drive-in setup with surround sound.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
     capacity: "18 cars",
     city: "Delhi NCR",
-    movieName: "Top Gun: Maverick"
+    movieName: "Our Fault"
   },
   {
     id: 8,
@@ -177,8 +177,16 @@ export const generateDynamicEvents = () => {
   
   const random = seededRandom(seed);
   
-  // Shuffle the events using the seeded random
-  const shuffledEvents = [...movieEventMappings].sort(() => 0.5 - random());
+  // Find the pinned event and others
+  const pinnedEvent = movieEventMappings.find(e => e.id === 1);
+  const otherEvents = movieEventMappings.filter(e => e.id !== 1);
+  
+  // Shuffle only the other events
+  const shuffledOthers = [...otherEvents].sort(() => 0.5 - random());
+  
+  // Combine pinned event with shuffled others
+  // Validate pinnedEvent exists to avoid errors if data changes
+  const shuffledEvents = pinnedEvent ? [pinnedEvent, ...shuffledOthers] : shuffledOthers;
   
   // Get the current date in IST
   const now = new Date();
