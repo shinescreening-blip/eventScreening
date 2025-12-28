@@ -29,7 +29,7 @@ const faqData = [
   {
     section: 'PAYMENT RELATED QUERIES',
     faqs: [
-      { q: 'Can I cancel my ticket?', a: 'There are no cancellations. You can only reschedule your ticket in case a show is cancelled by SCC for any reason.' },
+      { q: 'Can I cancel my ticket?', a: 'Yes, you can cancel your ticket. However, a refund will only be provided if the cancellation is made at least 12 hours before the scheduled show time.' },
       { q: 'Payment has been deducted but I have not received a ticket or confirmation?', a: "Don't worry, Please send a screenshot of the transaction along with your name, registered phone number/registered email to shinescreening@gmail.com, we will resolve it." },
     ],
   },
