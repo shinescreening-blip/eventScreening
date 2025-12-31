@@ -7,7 +7,7 @@ import { calculateSeatsBasedOnTime } from '../utils/seatLogic';
 
 const EventsSection = () => {
   const navigate = useNavigate();
-  const { getHomePageEvents } = useEventContext();
+  const { getHomePageEvents, forceRefreshEvents } = useEventContext();
   const processedEventIds = useRef(new Set());
 
   // Helper to apply seat logic
@@ -28,6 +28,10 @@ const EventsSection = () => {
 
   const handleViewMoreEvents = () => {
     navigate('/events');
+  };
+
+  const handleRefreshEvents = () => {
+    forceRefreshEvents();
   };
 
   useEffect(() => {
@@ -88,12 +92,20 @@ const EventsSection = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <button 
-            onClick={handleViewMoreEvents}
-            className="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 min-h-[44px]"
-          >
-            View More Events
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button 
+              onClick={handleViewMoreEvents}
+              className="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 min-h-[44px]"
+            >
+              View More Events
+            </button>
+            <button 
+              onClick={handleRefreshEvents}
+              className="w-full sm:w-auto bg-yellow-400 text-black px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300 min-h-[44px]"
+            >
+              Refresh Events
+            </button>
+          </div>
         </motion.div>
       </div>
     </section>

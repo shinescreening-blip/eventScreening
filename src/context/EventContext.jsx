@@ -30,6 +30,15 @@ export const EventProvider = ({ children }) => {
     localStorage.setItem('cachedDynamicEvents', JSON.stringify(newDynamicEvents));
   };
 
+  // Helper to force refresh events (useful for manual updates)
+  const forceRefreshEvents = () => {
+    console.log('Force refreshing events');
+    localStorage.removeItem('lastEventRefresh');
+    localStorage.removeItem('cachedDynamicEvents');
+    const now = new Date();
+    generateAndSaveEvents(now);
+  };
+
   // Initial load effect - runs only once on mount
   useEffect(() => {
     const loadInitialEvents = () => {
@@ -153,6 +162,7 @@ export const EventProvider = ({ children }) => {
     selectEvent,
     getHomePageEvents,
     lastRefresh,
+    forceRefreshEvents,
   }), [events, dynamicEvents, selectedEvent, getEventById, selectEvent, getHomePageEvents, lastRefresh]);
 
   return (
