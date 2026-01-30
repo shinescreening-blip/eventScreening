@@ -42,6 +42,10 @@ export const EventProvider = ({ children }) => {
   // Initial load effect - runs only once on mount
   useEffect(() => {
     const loadInitialEvents = () => {
+      // TEMPORARY: Force refresh to clear old cache with incorrect timing
+      localStorage.removeItem('lastEventRefresh');
+      localStorage.removeItem('cachedDynamicEvents');
+      
       const storedRefresh = localStorage.getItem('lastEventRefresh');
       const storedEvents = localStorage.getItem('cachedDynamicEvents');
       
