@@ -41,7 +41,7 @@ const createEvent = (eventData) => {
 export const eventsData = [
   createEvent({
     id: 1,
-    title: "Our Fault",
+    title: "Anyone But You",
     type: "Open-Screening",
     date: "October 18, 2025",
     time: "6:00 PM",
@@ -51,7 +51,7 @@ export const eventsData = [
     price: "899",
     capacity: "3 seats",
     city: "Delhi NCR",
-    movieName: "Our Fault"
+    movieName: "Anyone But You"
   },
   {
     id: 2,
@@ -128,7 +128,7 @@ export const eventsData = [
     date: "April 5, 2024",
     time: "8:00 PM",
     location: "JLN gate no. 14, Delhi",
-    description: "Feel the need for speed with Top Gun: Maverick. Experience high-octane action in our premium drive-in setup with surround sound.",
+    description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
     capacity: "4 cars",

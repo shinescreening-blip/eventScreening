@@ -2,16 +2,16 @@
 export const movieEventMappings = [
   {
     id: 1,
-    title: "Drive-in Cinema: Our Fault",
+    title: "Drive-in Cinema: Anyone But You",
     type: "Drive-in",
     time: "6:00 pm",
     location: "JLN gate 14, Delhi",
-    description: "Ana, a college student, interviews an enigmatic billionaire entrepreneur, Christian, for her campus' periodical. A steamy sadomasochistic affair starts between the two, whose roots lie in his past.",
+    description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
     capacity: "13",
     city: "Delhi NCR",
-    movieName: "Our Fault"
+    movieName: "Anyone But You"
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const movieEventMappings = [
     type: "Open Air",
     time: "5:00 PM",
     location: "JLN gate 14, Delhi",
-    description: "Join us for an emotional rollercoaster with Your Fault. Bring your blankets and experience this powerful story unfold under the open sky.",
+    description: "Join us for an emotional rollercoaster with YAnyone But You. Bring your blankets and experience this powerful story unfold under the open sky.",
     image: "https://sunsetcinemaclub.in/img/admin/page/home/AK9pBWeu1Y__DSC6756 (1).jpg",
     price: "899",
     capacity: "90 people",
@@ -80,16 +80,16 @@ export const movieEventMappings = [
   },
   {
     id: 7,
-    title: "Our Fault",
+    title: "Anyone But You",
     type: "Drive-in",
     time: "6:00 PM",
     location: "JLN gate 14, Delhi",
-    description: "Feel the need for speed with Top Gun: Maverick. Experience high-octane action in our premium drive-in setup with surround sound.",
+    description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
     capacity: "18 cars",
     city: "Delhi NCR",
-    movieName: "Our Fault"
+    movieName: "Anyone But You"
   },
   {
     id: 8,
