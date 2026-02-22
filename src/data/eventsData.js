@@ -41,8 +41,8 @@ const createEvent = (eventData) => {
 export const eventsData = [
   createEvent({
     id: 1,
-    title: "Anyone But You",
-    type: "Open-Screening",
+    title: "Regretting You",
+    type: "Drive-In",
     date: "October 18, 2025",
     time: "6:00 PM",
     location: "JLN gate no. 14, Delhi",

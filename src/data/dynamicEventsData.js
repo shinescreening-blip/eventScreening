@@ -4,7 +4,7 @@ export const movieEventMappings = [
     id: 1,
     title: "Drive-in Cinema: Anyone But You",
     type: "Drive-in",
-    time: "6:00 pm",
+    time: "8:00 pm",
     location: "JLN gate 14, Delhi",
     description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
@@ -80,16 +80,16 @@ export const movieEventMappings = [
   },
   {
     id: 7,
-    title: "Anyone But You",
+    title: "Drive-in Cinema:Regretting You",
     type: "Drive-in",
     time: "6:00 PM",
     location: "JLN gate 14, Delhi",
-    description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
+    description: "Regretting You explores a mother and daughter navigating grief, secrets, and fractured trust after tragedy, discovering love, forgiveness, and self-understanding while confronting painful truths shaping their intertwined lives together slowly",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
     price: "899",
     capacity: "18 cars",
     city: "Delhi NCR",
-    movieName: "Anyone But You"
+    movieName: "Regretting You"
   },
   {
     id: 8,
