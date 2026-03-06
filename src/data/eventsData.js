@@ -51,7 +51,7 @@ export const eventsData = [
     price: "899",
     capacity: "3 seats",
     city: "Delhi NCR",
-    movieName: "Anyone But You"
+    movieName: "Regretting You"
   },
   {
     id: 2,
