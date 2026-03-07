@@ -8,7 +8,7 @@ export const movieEventMappings = [
     location: "JLN gate 14, Delhi",
     description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
-    price: "899",
+    price: "1",
     capacity: "13",
     city: "Delhi NCR",
     movieName: "Anyone But You"
