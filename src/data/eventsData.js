@@ -116,7 +116,7 @@ export const eventsData = [
     location: "JLN gate no. 14, Delhi",
     description: "Witness James Cameron's visual masterpiece Avatar in our open-air setup. Experience Pandora like never before under the stars.",
     image: "https://media.assettype.com/deccanherald%2Fimport%2Fsites%2Fdh%2Ffiles%2Farticle_images%2FSCC.jpg?w=undefined",
-    : "899",
+    price: "899",
     capacity: "250 people",
     city: "Delhi NCR",
     movieName: "Bollywood Classics"
@@ -130,7 +130,7 @@ export const eventsData = [
     location: "JLN gate no. 14, Delhi",
     description: "Romantic comedy directed by Will Gluck, starring Sydney Sweeney and Glen Powell as Bea and Ben, two people who despise each other but pretend to be a couple at a wedding in Australia.",
     image: "https://sunsetcinemaclub.in/img/admin/venues/g6AXE4lF9p__MG_6087 (1).jpg",
-    : "899",
+    price: "899",
     capacity: "4 cars",
     city: "Delhi NCR"
   },
