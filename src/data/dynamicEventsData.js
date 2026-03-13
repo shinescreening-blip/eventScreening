@@ -17,7 +17,7 @@ export const movieEventMappings = [
     id: 2,
     title: "Open Air Screening: Ghosted",
     type: "Open Air",
-    time: "5:00 PM",
+    time: "8:00 PM",
     location: "JLN gate 14, Delhi",
     description: "Join us for an emotional rollercoaster with YAnyone But You. Bring your blankets and experience this powerful story unfold under the open sky.",
     image: "https://sunsetcinemaclub.in/img/admin/page/home/AK9pBWeu1Y__DSC6756 (1).jpg",
