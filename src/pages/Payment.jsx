@@ -159,7 +159,7 @@ const PaymentMethods = ({ finalPrice, onCancel }) => {
   
 
   const amount = Number(finalPrice || 0).toFixed(2);
-  const upiLink = `upi://pay?pa=sunitaban1983@okaxis&pn=${encodeURIComponent(
+  const upiLink = `upi://pay?pa=shinescreenings@ptyes&pn=${encodeURIComponent(
     'Shine Screenings'
   )}&am=${amount}&cu=INR&mc=5499&tn=Event+Payment`;
 
