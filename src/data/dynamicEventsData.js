@@ -106,8 +106,8 @@ export const movieEventMappings = [
   },
   {
     id: 9,
-    title: "Open Air Screening: The Matrix",
-    type: "Open Air",
+    title: "Drive in Screening: The Matrix",
+    type: "Drive in",
     time: "8:00 PM",
     location: "Lodhi Garden, Delhi",
     description: "Enter the Matrix with this iconic sci-fi thriller. Experience the groundbreaking visual effects under the open sky.",
