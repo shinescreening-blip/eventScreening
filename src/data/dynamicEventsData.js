@@ -2,7 +2,7 @@
 export const movieEventMappings = [
   {
     id: 1,
-    title: "Drive-in Cinema: Anyone But You",
+    title: "Drive-in Cinema: Me Before You",
     type: "Drive-in",
     time: "8:00 pm",
     location: "JLN gate 14, Delhi",
@@ -11,7 +11,7 @@ export const movieEventMappings = [
     price: "899",
     capacity: "13",
     city: "Delhi NCR",
-    movieName: "Anyone But You"
+    movieName: "Me Before You"
   },
   {
     id: 2,
